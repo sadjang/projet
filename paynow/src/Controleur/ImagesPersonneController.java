@@ -49,7 +49,7 @@ public class ImagesPersonneController extends AnchorPane implements Initializabl
     public ImagesPersonneController() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/paynow/" + fxmlFile));
-            //loader.setRoot(this);
+            loader.setRoot(this);
             loader.setController(this);
             loader.load();
         } catch (Exception ex) {
