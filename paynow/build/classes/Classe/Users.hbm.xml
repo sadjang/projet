@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14 janv. 2018 09:08:16 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Classe.Users" table="users" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="poste" class="Classe.Poste" fetch="select">
+            <column name="poste" not-null="true" />
+        </many-to-one>
+        <property name="nom" type="string">
+            <column name="nom" length="200" not-null="true" />
+        </property>
+        <property name="prenom" type="string">
+            <column name="prenom" length="200" />
+        </property>
+        <property name="ncni" type="string">
+            <column name="ncni" length="200" not-null="true" />
+        </property>
+        <property name="puctureusers" type="string">
+            <column name="puctureusers" />
+        </property>
+        <property name="picturecni" type="string">
+            <column name="picturecni" />
+        </property>
+        <property name="quartier" type="string">
+            <column name="quartier" length="100" />
+        </property>
+        <property name="pasword" type="string">
+            <column name="pasword" not-null="true" />
+        </property>
+        <property name="numtelph" type="string">
+            <column name="numtelph" length="22" not-null="true" />
+        </property>
+        <property name="actif" type="int">
+            <column name="actif" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

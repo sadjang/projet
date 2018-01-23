@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14 janv. 2018 09:08:16 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Classe.Tabdroit" table="tabdroit" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="designation" type="string">
+            <column name="designation" length="300" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

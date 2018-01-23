@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14 janv. 2018 09:08:16 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Classe.Informations" table="informations" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="operateur" class="Classe.Operateur" fetch="select">
+            <column name="operateur" not-null="true" />
+        </many-to-one>
+        <property name="nomexpediteur" type="string">
+            <column name="nomexpediteur" length="355" />
+        </property>
+        <property name="imeetelephone" type="string">
+            <column name="imeetelephone" length="355" />
+        </property>
+        <property name="cniexpediteur" type="string">
+            <column name="cniexpediteur" length="355" />
+        </property>
+        <property name="cnirecepteur" type="string">
+            <column name="cnirecepteur" length="355" />
+        </property>
+        <property name="marquetelephone" type="string">
+            <column name="marquetelephone" length="355" />
+        </property>
+        <property name="nomrecepteur" type="string">
+            <column name="nomrecepteur" length="355" />
+        </property>
+        <property name="numerorecepteur" type="string">
+            <column name="numerorecepteur" length="355" />
+        </property>
+        <property name="montantexpedition" type="java.lang.Integer">
+            <column name="montantexpedition" />
+        </property>
+        <property name="numeroexpediteur" type="string">
+            <column name="numeroexpediteur" length="355" />
+        </property>
+        <property name="dateexpedition" type="timestamp">
+            <column name="dateexpedition" length="25" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

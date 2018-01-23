@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20 janv. 2018 13:04:08 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Classe.Client" table="client" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="cni" type="string">
+            <column name="cni" not-null="true" />
+        </property>
+        <property name="telp" type="string">
+            <column name="telp" length="60" not-null="true" />
+        </property>
+        <property name="nom" type="string">
+            <column name="nom" not-null="true" />
+        </property>
+        <property name="prenom" type="string">
+            <column name="prenom" />
+        </property>
+        <property name="datenaissance" type="date">
+            <column name="datenaissance" length="13" />
+        </property>
+        <property name="quartier" type="string">
+            <column name="quartier" />
+        </property>
+    </class>
+</hibernate-mapping>
