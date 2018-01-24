@@ -53,145 +53,121 @@ public class ListClientsController implements Initializable {
     /**
      * Initializes the controller class.
      */
-     @FXML
+    @FXML
     private TableView<Client> tablClient;
-    ObservableList <Client>Tabclients=FXCollections.observableArrayList(); 
-     @FXML
+    ObservableList<Client> Tabclients = FXCollections.observableArrayList();
+    @FXML
     private GridPane graphGrid;
-    String[] tabRequette=new String[4];
-    
-    
-    
+    String[] tabRequette = new String[4];
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-         tabRequette[0]="";
-        tabRequette[1]="";
-        tabRequette[2]="";
-        tabRequette[3]="";
-       
-        
+        tabRequette[0] = "";
+        tabRequette[1] = "";
+        tabRequette[2] = "";
+        tabRequette[3] = "";
+
         initable(tabRequette);
-    }   
-    public Node createClient(String fxmlFile,Client client){
-        Node node=null;
-        
-         try {
-              
-             FXMLLoader loader = new FXMLLoader(getClass().getResource("/paynow/"+fxmlFile));
-             
-             ImagesPersonneController controlerClient = loader.getController();
-//                                      controlerClient.SetClient(client.getNom());
-                                      // controlerClient.initController();
-            node = (Node) loader.load();
-         } catch (IOException ex) {
-             java.util.logging.Logger.getLogger(ListClientsController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-         }
-         return node;
     }
-     private void initable(String[] tabRequette) {
-        TableColumn id=new TableColumn<>("N°") ;
-        TableColumn Cni=new TableColumn<>("Numero Cni") ;
-        TableColumn Telphone=new TableColumn<>("Telphone") ;
-        TableColumn Nom=new TableColumn<>("Nom") ;
-        TableColumn Prenom=new TableColumn<>("Prenom") ;
-        TableColumn DateNaissance=new TableColumn<>("Date de Naissance") ;
-         TableColumn quartier=new TableColumn<>("Quartier") ;
-       
-       
-        tablClient.getColumns().addAll(id,Cni,Nom,Prenom,Telphone,quartier);
-       
-      
+
+    public Node createClient(Client client) {
+
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/paynow/"+fxmlFile));
+        ImagesPersonneController controlerClient = new ImagesPersonneController();
+        controlerClient.SetClient(client);
+        controlerClient.initController();
+
+        return controlerClient;
+    }
+
+    private void initable(String[] tabRequette) {
+        TableColumn id = new TableColumn<>("N°");
+        TableColumn Cni = new TableColumn<>("Numero Cni");
+        TableColumn Telphone = new TableColumn<>("Telphone");
+        TableColumn Nom = new TableColumn<>("Nom");
+        TableColumn Prenom = new TableColumn<>("Prenom");
+        TableColumn DateNaissance = new TableColumn<>("Date de Naissance");
+        TableColumn quartier = new TableColumn<>("Quartier");
+
+        tablClient.getColumns().addAll(id, Cni, Nom, Prenom, Telphone, quartier);
+
         id.setCellValueFactory(
-                 new PropertyValueFactory<Client,Integer>("id"));
+                new PropertyValueFactory<Client, Integer>("id"));
         Cni.setCellValueFactory(
-                 new PropertyValueFactory<Client,String>("cni"));
+                new PropertyValueFactory<Client, String>("cni"));
         Telphone.setCellValueFactory(
-                 new PropertyValueFactory<Client,String>("telp"));
+                new PropertyValueFactory<Client, String>("telp"));
         Nom.setCellValueFactory(
-                 new PropertyValueFactory<Client,String>("nom"));
+                new PropertyValueFactory<Client, String>("nom"));
         Prenom.setCellValueFactory(
-                 new PropertyValueFactory<Client,String>("prenom"));
+                new PropertyValueFactory<Client, String>("prenom"));
         DateNaissance.setCellValueFactory(
-                 new PropertyValueFactory<Client,String>("datenaissance"));
+                new PropertyValueFactory<Client, String>("datenaissance"));
         quartier.setCellValueFactory(
-                 new PropertyValueFactory<Client,String>("quartier"));
+                new PropertyValueFactory<Client, String>("quartier"));
         //Thread h=new Thread(new DonnerReader ());
-       // h.start();
+        // h.start();
         startScheduledExecutorService();
-        
-        
+
     }
-     
-     
-     
+
     //////////////////////////////////////
-     private void startScheduledExecutorService(){
-                                
-        final ScheduledExecutorService scheduler 
-            = Executors.newScheduledThreadPool(1);
+    private void startScheduledExecutorService() {
+
+        final ScheduledExecutorService scheduler
+                = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(
-                new Runnable(){
-                      
-                    int va = 0;
-                      
-                    @Override
-                    public void run() {
-                        
-                           
-                            Platform.runLater(() -> {
-                                 IDclients dao=new Dclient();
-                                 IMclient metier=new Mclient(dao);
-                                 List<Client> clients=metier.findAllbyTable(tabRequette);
-                                 if(clients.size()>0){
-                                     Tabclients.clear();
-                                    Client client=null;
-                                    Iterator iter = clients.iterator();
-                    
-                                    while ( iter.hasNext()) {
-                                       client =(Client)iter.next();
-                                       client.setCni(client.getCni().trim());
-                                       client.setNom(client.getNom().trim());
-                                       client.setPrenom(client.getPrenom().trim());
-                                       client.setTelp(client.getTelp().trim());
-                                       if(client.getTelp()!=null)
-                                         client.setTelp(client.getTelp().trim());
-                                       Tabclients.add(client);
-                                       graphGrid.add(createClient("ImagesPersonne.fxml",client), 0, 0);
-                                      // graphGrid.add(createClient("ImagesPersonne.fxml",client), 1, 0);
-                                    }
-                                    
-                                    
-                                    Comparator<Client> comparator = Comparator.comparingInt(Client::getId); 
-                                    comparator = comparator.reversed();
-                                    FXCollections.sort(Tabclients, comparator);
-                                    tablClient.setItems(Tabclients);
-                               }
-                   
-                        
-                            });
-                            va++;
-                                
+                new Runnable() {
+
+            int va = 0;
+
+            @Override
+            public void run() {
+
+                Platform.runLater(() -> {
+                    IDclients dao = new Dclient();
+                    IMclient metier = new Mclient(dao);
+                    List<Client> clients = metier.findAllbyTable(tabRequette);
+                    if (clients.size() > 0) {
+                        Tabclients.clear();
+                        Client client = null;
+                        Iterator iter = clients.iterator();
+
+                        while (iter.hasNext()) {
+                            client = (Client) iter.next();
+                            client.setCni(client.getCni().trim());
+                            client.setNom(client.getNom().trim());
+                            client.setPrenom(client.getPrenom().trim());
+                            client.setTelp(client.getTelp().trim());
+                            if (client.getTelp() != null) {
+                                client.setTelp(client.getTelp().trim());
+                            }
+                            Tabclients.add(client);
+                            graphGrid.add(createClient(client), 0, 0);
+                            //graphGrid.add(createClient("ImagesPersonne.fxml",client), 1, 0);
+                        }
+
+                        Comparator<Client> comparator = Comparator.comparingInt(Client::getId);
+                        comparator = comparator.reversed();
+                        FXCollections.sort(Tabclients, comparator);
+                        tablClient.setItems(Tabclients);
                     }
-                }, 
-                1, 
-                1, 
-                TimeUnit.SECONDS);        
-        
+
+                });
+                va++;
+
+            }
+        },
+                1,
+                1,
+                TimeUnit.SECONDS);
+
     }
-   
-    
+
     ////////////////////////////////////
-    
-      
-     
-
-     
-     
-     
-      ////////////////////////////////////////////
- /*   class DonnerReader implements Runnable{
-
+    ////////////////////////////////////////////
+    /*   class DonnerReader implements Runnable{
         @Override
         public void run() {
            try{
@@ -226,10 +202,9 @@ public class ListClientsController implements Initializable {
        client.setNom("achille");
        client.setPrenom("avom");
          graphGrid.add(createClient("ImagesPersonne.fxml",clien), 0, 0);*/
-                      //  graphGrid.add(createClient("ImagesPersonne.fxml",client), 0, 0);
-                        
-       // graphGrid.setConstraints(CreateNode("ImagesPersonne.fxml",client.getNom()+" "+client.getPrenom()), c, l);
-     /*   if(c==5){
+    //  graphGrid.add(createClient("ImagesPersonne.fxml",client), 0, 0);
+    // graphGrid.setConstraints(CreateNode("ImagesPersonne.fxml",client.getNom()+" "+client.getPrenom()), c, l);
+    /*   if(c==5){
              
             l++;
             c=0;
@@ -237,7 +212,6 @@ public class ListClientsController implements Initializable {
            c++;
         }
         
-
                      }
                    
                       
@@ -245,8 +219,8 @@ public class ListClientsController implements Initializable {
                   /////  comparator = comparator.reversed();
                   /////  FXCollections.sort(Tabclients, comparator);
                   graphGrid.setConstraints(labe, 0, 0);*/
-                 /// // tablClient.setItems(Tabclients);
-           /*     }
+    /// // tablClient.setItems(Tabclients);
+    /*     }
                    
                Thread.sleep(1000);
              va++;
@@ -257,21 +231,6 @@ public class ListClientsController implements Initializable {
         }
         
     }
-    */
-    
+     */
     ///////////////////////////////////////
-   
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-    
 }
