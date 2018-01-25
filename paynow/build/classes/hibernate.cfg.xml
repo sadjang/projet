@@ -40,17 +40,23 @@ made subject to such option by the copyright holder.
 Contributor(s):
 -->
 <hibernate-configuration>
-  <session-factory>
-    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-    <property name="hibernate.connection.url">jdbc:postgresql://10.0.0.1:5432/paynow</property>
-    <property name="hibernate.connection.username">postgres</property>
-    <property name="hibernate.connection.password">avompetit1985</property>
-    <mapping resource="Classe/Tabdroit.hbm.xml"/>
-    <mapping resource="Classe/Users.hbm.xml"/>
-    <mapping resource="Classe/Informations.hbm.xml"/>
-    <mapping resource="Classe/Operateur.hbm.xml"/>
-    <mapping resource="Classe/Poste.hbm.xml"/>
-    <mapping resource="Classe/Client.hbm.xml"/>
-  </session-factory>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/paynow</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password"></property>
+        <property name="show_sql">false</property>
+        <property name="format_sql">true</property>
+        <property name="hbm2ddl.auto">update</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.enable_lazy_load_no_trans">true</property>
+        <property name="hibernate.cache.use_query_cache">false</property>
+        <mapping resource="Classe/Tabdroit.hbm.xml"/>
+        <mapping resource="Classe/Users.hbm.xml"/>
+        <mapping resource="Classe/Informations.hbm.xml"/>
+        <mapping resource="Classe/Operateur.hbm.xml"/>
+        <mapping resource="Classe/Poste.hbm.xml"/>
+        <mapping resource="Classe/Client.hbm.xml"/>
+    </session-factory>
 </hibernate-configuration>

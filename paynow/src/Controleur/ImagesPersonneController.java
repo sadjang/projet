@@ -59,14 +59,14 @@ public class ImagesPersonneController extends AnchorPane implements Initializabl
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        this.nom.setText(this.client.getNom());
+        this.prenom.setText(this.client.getPrenom());
 
     }
 
     public void SetClient(String tring) {
         this.client = client;
-        this.nom.setText(client.getNom());
-        this.prenom.setText(client.getPrenom());
+
     }
 
     public void initController() {
