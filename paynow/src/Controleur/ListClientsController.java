@@ -142,7 +142,12 @@ public class ListClientsController implements Initializable {
                         
                         Client client = null;
                         Iterator iter = clients.iterator();
-
+                        int nomelement=clients.size();
+                        int conteur=nomelement;
+                        int l=0;
+                        int c=0;
+                        int nombreDelign=nomelement/4;
+                        
                         while (iter.hasNext()) {
                             client = (Client) iter.next();
                             client.setCni(client.getCni().trim());
@@ -154,21 +159,11 @@ public class ListClientsController implements Initializable {
                             }
                             Tabclients.add(client);
                             
-                            
-                            int nomelement=clients.size();
-                            int conteur=nomelement;
-                            int l=0;
-                            int c=0;
-                            int nombreDelign=nomelement/4;
-                              while(l<=nombreDelign){
-                                while(conteur>0&&c<4){
-                                    
-                                    graphGrid.add(createClient(client), c, l);
-                                 conteur--;
-                                 c++;
-                                }
-                                
-                              l++;  
+                            graphGrid.add(createClient(client), c, l);
+                            c++;
+                            if(c > nombreDelign){
+                                c = 0;
+                                l++;
                             }
                        
                             
