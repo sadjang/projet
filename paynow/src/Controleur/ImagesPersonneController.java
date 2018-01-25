@@ -63,16 +63,27 @@ public class ImagesPersonneController extends AnchorPane implements Initializabl
 
     }
 
+<<<<<<< HEAD
     public void SetClient(Client client) {
         this.client = client;    
         this.nom.setText(client.getNom());
         //this.prenom.setText(client.getPrenom());
         this.telph.setText(client.getTelp());
        // this.image=
+=======
+    public void SetClient(String tring) {
+        this.client = client;
+        this.nom.setText(client.getNom());
+        this.prenom.setText(client.getPrenom());
+>>>>>>> origin/master
     }
 
     public void initController() {
         // TODO
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/master
