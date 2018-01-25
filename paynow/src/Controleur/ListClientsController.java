@@ -39,6 +39,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import org.jboss.logging.Logger;
 import org.jboss.logging.Logger.Level;
@@ -72,8 +73,6 @@ public class ListClientsController implements Initializable {
     }
 
     public Node createClient(Client client) {
-
-        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/paynow/"+fxmlFile));
         ImagesPersonneController controlerClient = new ImagesPersonneController();
         controlerClient.SetClient(client);
         controlerClient.initController();
@@ -91,6 +90,14 @@ public class ListClientsController implements Initializable {
         TableColumn quartier = new TableColumn<>("Quartier");
 
         tablClient.getColumns().addAll(id, Cni, Nom, Prenom, Telphone, quartier);
+        graphGrid.setGridLinesVisible(true);
+        final Region region = new Region(); 
+        
+         region.setStyle("-fx-background-color: gold; -fx-border-color: goldenrod;"); 
+        region.setPrefSize(100, 100); 
+        
+        
+        
 
         id.setCellValueFactory(
                 new PropertyValueFactory<Client, Integer>("id"));
@@ -131,6 +138,8 @@ public class ListClientsController implements Initializable {
                     List<Client> clients = metier.findAllbyTable(tabRequette);
                     if (clients.size() > 0) {
                         Tabclients.clear();
+                        graphGrid.getChildren().removeAll();
+                        
                         Client client = null;
                         Iterator iter = clients.iterator();
 
@@ -144,7 +153,25 @@ public class ListClientsController implements Initializable {
                                 client.setTelp(client.getTelp().trim());
                             }
                             Tabclients.add(client);
-                            graphGrid.add(createClient(client), 0, 0);
+                            
+                            
+                            int nomelement=clients.size();
+                            int conteur=nomelement;
+                            int l=0;
+                            int c=0;
+                            int nombreDelign=nomelement/4;
+                              while(l<=nombreDelign){
+                                while(conteur>0&&c<4){
+                                    
+                                    graphGrid.add(createClient(client), c, l);
+                                 conteur--;
+                                 c++;
+                                }
+                                
+                              l++;  
+                            }
+                       
+                            
                             //graphGrid.add(createClient("ImagesPersonne.fxml",client), 1, 0);
                         }
 
