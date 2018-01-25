@@ -73,15 +73,8 @@ public class ListClientsController implements Initializable {
     }
 
     public Node createClient(Client client) {
-<<<<<<< HEAD
         ImagesPersonneController controlerClient = new ImagesPersonneController();
         controlerClient.SetClient(client);
-=======
-
-        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/paynow/"+fxmlFile));
-        ImagesPersonneController controlerClient = new ImagesPersonneController();
-        controlerClient.SetClient(client.getNom());
->>>>>>> origin/master
         controlerClient.initController();
 
         return controlerClient;
@@ -97,7 +90,6 @@ public class ListClientsController implements Initializable {
         TableColumn quartier = new TableColumn<>("Quartier");
 
         tablClient.getColumns().addAll(id, Cni, Nom, Prenom, Telphone, quartier);
-<<<<<<< HEAD
         graphGrid.setGridLinesVisible(true);
         final Region region = new Region(); 
         
@@ -106,8 +98,6 @@ public class ListClientsController implements Initializable {
         
         
         
-=======
->>>>>>> origin/master
 
         id.setCellValueFactory(
                 new PropertyValueFactory<Client, Integer>("id"));
@@ -148,11 +138,8 @@ public class ListClientsController implements Initializable {
                     List<Client> clients = metier.findAllbyTable(tabRequette);
                     if (clients.size() > 0) {
                         Tabclients.clear();
-<<<<<<< HEAD
                         graphGrid.getChildren().removeAll();
                         
-=======
->>>>>>> origin/master
                         Client client = null;
                         Iterator iter = clients.iterator();
 
@@ -166,7 +153,6 @@ public class ListClientsController implements Initializable {
                                 client.setTelp(client.getTelp().trim());
                             }
                             Tabclients.add(client);
-<<<<<<< HEAD
                             
                             
                             int nomelement=clients.size();
@@ -186,9 +172,6 @@ public class ListClientsController implements Initializable {
                             }
                        
                             
-=======
-                            graphGrid.add(createClient(client), 0, 0);
->>>>>>> origin/master
                             //graphGrid.add(createClient("ImagesPersonne.fxml",client), 1, 0);
                         }
 
@@ -197,7 +180,6 @@ public class ListClientsController implements Initializable {
                         FXCollections.sort(Tabclients, comparator);
                         tablClient.setItems(Tabclients);
                     }
-<<<<<<< HEAD
 
                 });
                 va++;
@@ -207,23 +189,6 @@ public class ListClientsController implements Initializable {
                 1,
                 1,
                 TimeUnit.SECONDS);
-=======
-
-                });
-                va++;
-
-            }
-        },
-                1,
-                1,
-                TimeUnit.SECONDS);
-
-    }
-
-    ////////////////////////////////////
-    ////////////////////////////////////////////
-    /*   class DonnerReader implements Runnable{
->>>>>>> origin/master
 
     }
 
@@ -295,8 +260,4 @@ public class ListClientsController implements Initializable {
     }
      */
     ///////////////////////////////////////
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/master
